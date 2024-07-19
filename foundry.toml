@@ -5,8 +5,9 @@ libs = ["lib"]
 verbosity = 3
 solc-version = "0.8.24"
 evm_version = "paris"
-via_ir = true
+via_ir = false
 fs_permissions = [{ access = "read-write", path = "./deployments/"}, { access = "read", path = "./constants/"}]
+memory_limit = 17179869184
 
 [fmt]
 sort_impots = true
