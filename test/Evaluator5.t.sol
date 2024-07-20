@@ -3,16 +3,16 @@ pragma solidity ^0.8.24;
 
 import { Test, console } from "forge-std/Test.sol";
 
-import { IEvaluator } from "src/evaluator/interfaces/IEvaluator.sol";
-import { IHashtable } from "src/evaluator/interfaces/IHashtable.sol";
-import { DpTables } from "src/evaluator/DpTables.sol";
-import { Evaluator5 } from "src/evaluator/Evaulator5.sol";
-import { Flush1 } from "src/evaluator/flush/Flush1.sol";
-import { Flush2 } from "src/evaluator/flush/Flush2.sol";
-import { Flush3 } from "src/evaluator/flush/Flush3.sol";
-import { NoFlush5_1 } from "src/evaluator/noflush5/NoFlush5_1.sol";
-import { NoFlush5_2 } from "src/evaluator/noflush5/NoFlush5_2.sol";
-import { NoFlush5_3 } from "src/evaluator/noflush5/NoFlush5_3.sol";
+import { IEvaluator } from "src/interfaces/IEvaluator.sol";
+import { IHashtable } from "src/interfaces/IHashtable.sol";
+import { DpTables } from "src/DpTables.sol";
+import { Evaluator5 } from "src/Evaulator5.sol";
+import { Flush1 } from "src/flush/Flush1.sol";
+import { Flush2 } from "src/flush/Flush2.sol";
+import { Flush3 } from "src/flush/Flush3.sol";
+import { NoFlush5_1 } from "src/noflush5/NoFlush5_1.sol";
+import { NoFlush5_2 } from "src/noflush5/NoFlush5_2.sol";
+import { NoFlush5_3 } from "src/noflush5/NoFlush5_3.sol";
 
 contract Evaluator5Test is Test {
     uint8 public constant SUIT_SPADE = 0;
