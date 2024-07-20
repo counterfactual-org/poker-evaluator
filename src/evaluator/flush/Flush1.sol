@@ -2,7 +2,7 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Flush1 {
-    uint256[3000] public flush = [
+    uint256[3000] public get = [
         uint256(0),
         uint256(0),
         uint256(0),

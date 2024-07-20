@@ -1,8 +1,8 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-contract NoFlush17 {
-    uint256[1205] public noflush = [
+contract NoFlush7_17 {
+    uint256[1205] public get = [
         314,
         315,
         315,

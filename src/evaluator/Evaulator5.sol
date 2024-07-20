@@ -5,12 +5,12 @@ import { BaseEvaluator } from "./BaseEvaluator.sol";
 import { DpTables } from "./DpTables.sol";
 import { IHashtable } from "./interfaces/IHashtable.sol";
 
-contract Evaluator7 is BaseEvaluator {
+contract Evaluator5 is BaseEvaluator {
     DpTables public immutable DP_TABLES;
     IHashtable[3] public FLUSHES;
-    IHashtable[17] public NO_FLUSHES;
+    IHashtable[3] public NO_FLUSHES;
 
-    constructor(DpTables _dpTables, IHashtable[3] memory _flushes, IHashtable[17] memory _noflushes) {
+    constructor(DpTables _dpTables, IHashtable[3] memory _flushes, IHashtable[3] memory _noflushes) {
         DP_TABLES = _dpTables;
         FLUSHES = _flushes;
         NO_FLUSHES = _noflushes;
@@ -18,7 +18,7 @@ contract Evaluator7 is BaseEvaluator {
 
     function evaluate(uint256[] memory c) public view override returns (uint256) {
         uint256 len = c.length;
-        if (len != 7) revert InvalidNumberOfCards();
+        if (len != 5) revert InvalidNumberOfCards();
 
         uint256 suit_hash;
 
@@ -27,8 +27,6 @@ contract Evaluator7 is BaseEvaluator {
         suit_hash += bit_of_mod_4_x_3[c[2]];
         suit_hash += bit_of_mod_4_x_3[c[3]];
         suit_hash += bit_of_mod_4_x_3[c[4]];
-        suit_hash += bit_of_mod_4_x_3[c[5]];
-        suit_hash += bit_of_mod_4_x_3[c[6]];
 
         uint256 suits = DpTables(DP_TABLES).suits(suit_hash);
 
@@ -40,8 +38,6 @@ contract Evaluator7 is BaseEvaluator {
             suit_binary[c[2] & 0x3] |= bit_of_div_4[c[2]];
             suit_binary[c[3] & 0x3] |= bit_of_div_4[c[3]];
             suit_binary[c[4] & 0x3] |= bit_of_div_4[c[4]];
-            suit_binary[c[5] & 0x3] |= bit_of_div_4[c[5]];
-            suit_binary[c[6] & 0x3] |= bit_of_div_4[c[6]];
 
             uint256 sb = suit_binary[suits - 1];
             return FLUSHES[sb / 3000].get(sb % 3000);
@@ -54,10 +50,8 @@ contract Evaluator7 is BaseEvaluator {
         quinary[(c[2] >> 2)]++;
         quinary[(c[3] >> 2)]++;
         quinary[(c[4] >> 2)]++;
-        quinary[(c[5] >> 2)]++;
-        quinary[(c[6] >> 2)]++;
 
-        uint256 hash = DpTables(DP_TABLES).hash_quinary(quinary, 7);
+        uint256 hash = DpTables(DP_TABLES).hash_quinary(quinary, 5);
 
         return NO_FLUSHES[hash / 3000].get(hash % 3000);
     }
