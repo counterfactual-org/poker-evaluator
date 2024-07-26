@@ -6,14 +6,14 @@ import { DpTables } from "./DpTables.sol";
 import { IHashtable } from "./interfaces/IHashtable.sol";
 
 contract Evaluator7 is BaseEvaluator {
-    DpTables public immutable DP_TABLES;
-    IHashtable[3] public FLUSHES;
-    IHashtable[17] public NO_FLUSHES;
+    DpTables public immutable dpTables;
+    IHashtable public immutable flush;
+    IHashtable[7] public noflushes;
 
-    constructor(DpTables _dpTables, IHashtable[3] memory _flushes, IHashtable[17] memory _noflushes) {
-        DP_TABLES = _dpTables;
-        FLUSHES = _flushes;
-        NO_FLUSHES = _noflushes;
+    constructor(DpTables _dpTables, IHashtable _flush, IHashtable[7] memory _noflushes) {
+        dpTables = _dpTables;
+        flush = _flush;
+        noflushes = _noflushes;
     }
 
     function evaluate(uint256[] memory c) public view override returns (uint256) {
@@ -30,7 +30,7 @@ contract Evaluator7 is BaseEvaluator {
         suit_hash += bit_of_mod_4_x_3[c[5]];
         suit_hash += bit_of_mod_4_x_3[c[6]];
 
-        uint256 suits = DpTables(DP_TABLES).suits(suit_hash);
+        uint256 suits = DpTables(dpTables).suits(suit_hash);
 
         if (suits > 0) {
             uint256[4] memory suit_binary;
@@ -43,8 +43,7 @@ contract Evaluator7 is BaseEvaluator {
             suit_binary[c[5] & 0x3] |= bit_of_div_4[c[5]];
             suit_binary[c[6] & 0x3] |= bit_of_div_4[c[6]];
 
-            uint256 sb = suit_binary[suits - 1];
-            return FLUSHES[sb / 3000].get(sb % 3000);
+            return flush.get(suit_binary[suits - 1]);
         }
 
         uint8[13] memory quinary;
@@ -57,8 +56,8 @@ contract Evaluator7 is BaseEvaluator {
         quinary[(c[5] >> 2)]++;
         quinary[(c[6] >> 2)]++;
 
-        uint256 hash = DpTables(DP_TABLES).hash_quinary(quinary, 7);
+        uint256 hash = DpTables(dpTables).hash_quinary(quinary, 7);
 
-        return NO_FLUSHES[hash / 3000].get(hash % 3000);
+        return noflushes[hash / 8000].get(hash % 8000);
     }
 }

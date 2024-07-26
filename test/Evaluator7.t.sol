@@ -7,26 +7,14 @@ import { IEvaluator } from "src/interfaces/IEvaluator.sol";
 import { IHashtable } from "src/interfaces/IHashtable.sol";
 import { DpTables } from "src/DpTables.sol";
 import { Evaluator7 } from "src/Evaulator7.sol";
-import { Flush1 } from "src/flush/Flush1.sol";
-import { Flush2 } from "src/flush/Flush2.sol";
-import { Flush3 } from "src/flush/Flush3.sol";
-import { NoFlush7_1 } from "src/noflush7/NoFlush7_1.sol";
-import { NoFlush7_10 } from "src/noflush7/NoFlush7_10.sol";
-import { NoFlush7_11 } from "src/noflush7/NoFlush7_11.sol";
-import { NoFlush7_12 } from "src/noflush7/NoFlush7_12.sol";
-import { NoFlush7_13 } from "src/noflush7/NoFlush7_13.sol";
-import { NoFlush7_14 } from "src/noflush7/NoFlush7_14.sol";
-import { NoFlush7_15 } from "src/noflush7/NoFlush7_15.sol";
-import { NoFlush7_16 } from "src/noflush7/NoFlush7_16.sol";
-import { NoFlush7_17 } from "src/noflush7/NoFlush7_17.sol";
-import { NoFlush7_2 } from "src/noflush7/NoFlush7_2.sol";
-import { NoFlush7_3 } from "src/noflush7/NoFlush7_3.sol";
-import { NoFlush7_4 } from "src/noflush7/NoFlush7_4.sol";
-import { NoFlush7_5 } from "src/noflush7/NoFlush7_5.sol";
-import { NoFlush7_6 } from "src/noflush7/NoFlush7_6.sol";
-import { NoFlush7_7 } from "src/noflush7/NoFlush7_7.sol";
-import { NoFlush7_8 } from "src/noflush7/NoFlush7_8.sol";
-import { NoFlush7_9 } from "src/noflush7/NoFlush7_9.sol";
+import { Flush } from "src/hashtables/Flush.sol";
+import { Noflush7_0 } from "src/hashtables/Noflush7_0.sol";
+import { Noflush7_1 } from "src/hashtables/Noflush7_1.sol";
+import { Noflush7_2 } from "src/hashtables/Noflush7_2.sol";
+import { Noflush7_3 } from "src/hashtables/Noflush7_3.sol";
+import { Noflush7_4 } from "src/hashtables/Noflush7_4.sol";
+import { Noflush7_5 } from "src/hashtables/Noflush7_5.sol";
+import { Noflush7_6 } from "src/hashtables/Noflush7_6.sol";
 
 contract Evaluator7Test is Test {
     uint8 public constant SUIT_SPADE = 0;
@@ -57,29 +45,16 @@ contract Evaluator7Test is Test {
     Evaluator7 private evaluator;
 
     function setUp() public {
-        IHashtable[3] memory flushes;
-        flushes[0] = IHashtable(address(new Flush1()));
-        flushes[1] = IHashtable(address(new Flush2()));
-        flushes[2] = IHashtable(address(new Flush3()));
-        IHashtable[17] memory noflushes;
-        noflushes[0] = IHashtable(address(new NoFlush7_1()));
-        noflushes[1] = IHashtable(address(new NoFlush7_2()));
-        noflushes[2] = IHashtable(address(new NoFlush7_3()));
-        noflushes[3] = IHashtable(address(new NoFlush7_4()));
-        noflushes[4] = IHashtable(address(new NoFlush7_5()));
-        noflushes[5] = IHashtable(address(new NoFlush7_6()));
-        noflushes[6] = IHashtable(address(new NoFlush7_7()));
-        noflushes[7] = IHashtable(address(new NoFlush7_8()));
-        noflushes[8] = IHashtable(address(new NoFlush7_9()));
-        noflushes[9] = IHashtable(address(new NoFlush7_10()));
-        noflushes[10] = IHashtable(address(new NoFlush7_11()));
-        noflushes[11] = IHashtable(address(new NoFlush7_12()));
-        noflushes[12] = IHashtable(address(new NoFlush7_13()));
-        noflushes[13] = IHashtable(address(new NoFlush7_14()));
-        noflushes[14] = IHashtable(address(new NoFlush7_15()));
-        noflushes[15] = IHashtable(address(new NoFlush7_16()));
-        noflushes[16] = IHashtable(address(new NoFlush7_17()));
-        evaluator = new Evaluator7(new DpTables(), flushes, noflushes);
+        IHashtable flush = new Flush();
+        IHashtable[7] memory noflushes;
+        noflushes[0] = IHashtable(address(new Noflush7_0()));
+        noflushes[1] = IHashtable(address(new Noflush7_1()));
+        noflushes[2] = IHashtable(address(new Noflush7_2()));
+        noflushes[3] = IHashtable(address(new Noflush7_3()));
+        noflushes[4] = IHashtable(address(new Noflush7_4()));
+        noflushes[5] = IHashtable(address(new Noflush7_5()));
+        noflushes[6] = IHashtable(address(new Noflush7_6()));
+        evaluator = new Evaluator7(new DpTables(), flush, noflushes);
     }
 
     function test_handRank_cases() public view {

@@ -7,12 +7,8 @@ import { IEvaluator } from "src/interfaces/IEvaluator.sol";
 import { IHashtable } from "src/interfaces/IHashtable.sol";
 import { DpTables } from "src/DpTables.sol";
 import { Evaluator5 } from "src/Evaulator5.sol";
-import { Flush1 } from "src/flush/Flush1.sol";
-import { Flush2 } from "src/flush/Flush2.sol";
-import { Flush3 } from "src/flush/Flush3.sol";
-import { NoFlush5_1 } from "src/noflush5/NoFlush5_1.sol";
-import { NoFlush5_2 } from "src/noflush5/NoFlush5_2.sol";
-import { NoFlush5_3 } from "src/noflush5/NoFlush5_3.sol";
+import { Flush } from "src/hashtables/Flush.sol";
+import { Noflush5 } from "src/hashtables/Noflush5.sol";
 
 contract Evaluator5Test is Test {
     uint8 public constant SUIT_SPADE = 0;
@@ -43,15 +39,9 @@ contract Evaluator5Test is Test {
     Evaluator5 private evaluator;
 
     function setUp() public {
-        IHashtable[3] memory flushes;
-        flushes[0] = IHashtable(address(new Flush1()));
-        flushes[1] = IHashtable(address(new Flush2()));
-        flushes[2] = IHashtable(address(new Flush3()));
-        IHashtable[3] memory noflushes;
-        noflushes[0] = IHashtable(address(new NoFlush5_1()));
-        noflushes[1] = IHashtable(address(new NoFlush5_2()));
-        noflushes[2] = IHashtable(address(new NoFlush5_3()));
-        evaluator = new Evaluator5(new DpTables(), flushes, noflushes);
+        IHashtable flush = new Flush();
+        IHashtable noflush = new Noflush5();
+        evaluator = new Evaluator5(new DpTables(), flush, noflush);
     }
 
     function test_handRank_cases() public view {
