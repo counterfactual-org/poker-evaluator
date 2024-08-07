@@ -11,8 +11,6 @@ contract DeployCommon is BaseScript {
     bytes32 private constant SALT = bytes32(uint256(0));
 
     function _run(uint256, address) internal override {
-        _enforceChain(ARBITRUM);
-
         address dpTables = _loadDeployment("DpTables");
         if (dpTables == address(0)) {
             IHashtable flush = IHashtable(_loadDeployment("Flush"));

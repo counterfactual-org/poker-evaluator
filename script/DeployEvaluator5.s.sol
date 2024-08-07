@@ -12,8 +12,6 @@ contract DeployEvaluator5 is BaseScript {
     bytes32 private constant SALT = bytes32(uint256(0));
 
     function _run(uint256, address) internal override {
-        _enforceChain(ARBITRUM);
-
         address dpTables = _loadDeployment("DpTables");
         if (dpTables == address(0)) revert("DpTables not deployed");
         IHashtable flush = IHashtable(_loadDeployment("Flush"));
