@@ -118,12 +118,12 @@ contract Evaluator9Test is Test {
         _assertHandRank("5c Th 3d Jh Js Jd Jc 2s 2h", IEvaluator.HandRank.FourOfAKind);
         _assertHandRank("5c Th 3d Jh Js Jd Tc 2s 2h", IEvaluator.HandRank.FullHouse);
         _assertHandRank("5c 8h 3d Jh Qh Kh 9h 2s 2h", IEvaluator.HandRank.Flush);
-        _assertHandRank("5c Th 3d Jh Qh Kh As 2s 2h", IEvaluator.HandRank.Straight);
-        _assertHandRank("5c As 3d 2h 3d 4h 5c 2s 2h", IEvaluator.HandRank.Straight);
-        _assertHandRank("5c Th 3d Jh Js Jd 9c 2s 2h", IEvaluator.HandRank.ThreeOfAKind);
-        _assertHandRank("5c Th 3d Jh Js 9d 9c 2s 2h", IEvaluator.HandRank.TwoPair);
-        _assertHandRank("5c Th 3d Jh 2s 9d 9c 2s 2h", IEvaluator.HandRank.OnePair);
-        _assertHandRank("5c Th 3d Jh 2s Ad 9c 2s 2h", IEvaluator.HandRank.HighCard);
+        _assertHandRank("5c Th 3d Jh Qh Kh As 2s 2d", IEvaluator.HandRank.Straight);
+        _assertHandRank("5c As 3d 2h 3d 4h 5c 2s 4h", IEvaluator.HandRank.Straight);
+        _assertHandRank("5c Th 3d Jh Js Jd 9c 2s 4h", IEvaluator.HandRank.ThreeOfAKind);
+        _assertHandRank("5c Th 3d Jh Js 9d 9c 2s 4h", IEvaluator.HandRank.TwoPair);
+        _assertHandRank("5c Th 3d Jh 2s 9d 9c 4s 7h", IEvaluator.HandRank.OnePair);
+        _assertHandRank("5c Th 3d Jh 2s Ad 9c 6s 7h", IEvaluator.HandRank.HighCard);
     }
 
     function _assertHandRank(string memory hand, IEvaluator.HandRank expected) internal view {
